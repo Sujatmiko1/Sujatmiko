@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teknik Geomatika</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+  <style>
+    header {
+      background-color: yellow;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    footer {
+      background-color: orange;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .sidebar {
+      background-color: #f8f9fa;
+      padding: 15px;
+    }
+    .justify-text {
+      text-align: justify;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+    .legend {
+      background: white;
+      line-height: 1.5em;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Teknik Geomatika UPN “Veteran” Yogyakarta
+</header>
+
+<!-- Navbar -->
+<ul class="nav nav-tabs bg-dark" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active text-white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">Home</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link text-white" id="peta-tab" data-bs-toggle="tab" data-bs-target="#peta" type="button" role="tab">Peta</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link text-white" id="peta-interaktif-tab" data-bs-toggle="tab" data-bs-target="#peta-interaktif" type="button" role="tab">Peta Interaktif</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <!-- Tab Home -->
+  <div class="tab-pane fade show active" id="home" role="tabpanel">
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-md-3 sidebar">
+          <ul class="list-unstyled">
+            <li><strong>KBK Terestris</strong></li>
+            <li><strong>KBK Sistem Informasi Geografis</strong></li>
+            <li><strong>KBK Fotogrametri</strong></li>
+            <li><strong>KBK Penginderaan Jauh</strong></li>
+          </ul>
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-8">
+              <p class="justify-text">Salah satu mata kuliah yang termasuk dalam KBK Sistem Informasi Geografis (SIG) adalah SIG Berbasis Internet. Pada mata kuliah ini mahasiswa mempelajari pengaplikasian SIG dengan berbasis pada platform internet. Mahasiswa mempelajari konsep kerja internet, proses request dan respond oleh user dan client, serta pembangunan website itu sendiri.</p>
+              <p class="justify-text">Memahami HTML dan CSS merupakan langkah selanjutnya bagi mahasiswa yang membuat halaman website. Kali ini, salah satu tugas adalah membangun tampilan halaman web sederhana ini. Selanjutnya halaman sederhana ini dikembangkan kembali dengan mengaplikasikan penggunaan Bootstrap.</p>
+            </div>
+            <div class="col-md-4">
+              <img src="image.png" class="img-fluid" alt="gambar http">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Peta -->
+  <div class="tab-pane fade" id="peta" role="tabpanel">
+    <div class="container mt-4">
+      <h3>Jenis dan Contoh Peta</h3>
+      <p class="justify-text">Peta merupakan representasi grafis dari permukaan bumi atau sebagian darinya yang disajikan pada bidang datar dengan skala tertentu. Peta menggambarkan berbagai objek geografis seperti gunung, sungai, jalan, dan batas wilayah dengan menggunakan simbol-simbol khusus. Tujuan utama dari peta adalah untuk memberikan informasi spasial kepada pengguna agar dapat memahami letak dan hubungan antar objek di permukaan bumi. Peta dapat disajikan dalam berbagai bentuk, baik cetak maupun digital. Berdasarkan karakteristiknya, peta dapat dibedakan menjadi beberapa jenis:</p>
+      <h5 class="mt-4">Contoh Peta Statis</h5>
+      <p class="justify-text">Peta statis merupakan jenis peta yang tidak berubah isinya setelah dibuat. Peta ini biasanya dicetak di atas kertas atau disimpan dalam format digital seperti gambar (.jpg, .png), namun tidak dapat diubah atau dimodifikasi secara langsung oleh pengguna. Informasi yang ditampilkan bersifat tetap dan tidak dapat menyesuaikan dengan kondisi terkini. Peta statis sering digunakan dalam buku-buku atlas, peta topografi cetak, dan peta dinding. Meski tidak fleksibel, peta ini tetap efektif untuk menyampaikan informasi dasar geografis secara visual.</p>
+      <img src="peta-statis.jpg" class="img-fluid mb-4" alt="Peta Statis">
+      <h5 class="mt-4">Contoh Peta Dinamis</h5>
+      <p class="justify-text">Peta dinamis merupakan peta digital yang dapat mengalami perubahan atau pembaruan informasi sesuai dengan data yang masuk. Jenis peta ini sering digunakan untuk menampilkan data yang bersifat real-time atau terus berkembang, seperti informasi cuaca, gempa bumi, atau lalu lintas. Peta dinamis sangat berguna dalam pemantauan kondisi yang berubah secara cepat dan memerlukan respon langsung dari pengguna atau sistem. Dengan kemampuannya dalam menampilkan informasi terkini, peta ini menjadi alat yang penting dalam sistem informasi geografis modern.</p>
+      <img src="peta-Dinamis.jpg" class="img-fluid mb-4" alt="Peta Dinamis">
+    </div>
+  </div>
+
+  <!-- Tab Peta Interaktif -->
+  <div class="tab-pane fade" id="peta-interaktif" role="tabpanel">
+    <div class="container mt-4">
+      <h3>Peta Interaktif</h3>
+      <p class="justify-text">Peta interaktif adalah peta digital yang memungkinkan pengguna untuk berinteraksi langsung dengan data geografis yang ditampilkan, seperti menampilkan informasi, menambahkan data, hingga merencanakan rute perjalanan.</p>
+
+      <div id="map"></div>
+
+      <form class="row mt-3">
+        <div class="col-md-5">
+          <input id="start" class="form-control" placeholder="Titik Awal (lat,lng)" type="text">
+        </div>
+        <div class="col-md-5">
+          <input id="end" class="form-control" placeholder="Titik Akhir (lat,lng)" type="text">
+        </div>
+        <div class="col-md-2">
+          <button type="button" onclick="setRoute()" class="btn btn-primary w-100">Tampilkan Rute</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="mt-4">
+  <strong>Copyright © Sujatmiko Nugroho Jati_11720026</strong>
+</footer>
+
+<!-- Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
+<script>
+  const map = L.map('map').setView([-7.826532968716728, 110.36082474915983], 17);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+  // Layer group
+  const layers = {
+    'Asrama Putra': L.geoJSON(null, { style: { color: 'blue' } }).addTo(map),
+    'Asrama Putri': L.geoJSON(null, { style: { color: 'red' } }).addTo(map),
+    'Bangunan Umum': L.geoJSON(null, { style: { color: 'green' } }).addTo(map)
+  };
+
+  // Load GeoJSON
+  fetch('asrama_putra_cleaned.geojson').then(res => res.json()).then(data => layers['Asrama Putra'].addData(data));
+  fetch('asrama_putri_cleaned.geojson').then(res => res.json()).then(data => layers['Asrama Putri'].addData(data));
+  fetch('bangunan_umum_cleaned.geojson').then(res => res.json()).then(data => layers['Bangunan Umum'].addData(data));
+
+  // Control
+  L.control.layers(null, layers).addTo(map);
+
+  // Routing
+  let control = null;
+  function setRoute() {
+    const start = document.getElementById("start").value.split(',').map(Number);
+    const end = document.getElementById("end").value.split(',').map(Number);
+    if (control) {
+      map.removeControl(control);
+    }
+    control = L.Routing.control({
+      waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+      routeWhileDragging: false
+    }).addTo(map);
+  }
+</script>
+
+</body>
+</html>
